@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base target="_top">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="keywords" content="Open Badges">
+    <script>
+        {% include "formControls.js" %}
+        {% include "validate.js" %}
+        {% include "submit.js" %}
+    </script>
+    <style>
+        {% include "styles.css" %}
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>UCS Open Badges Issuer</h1>
+        <h2>Specification v1.1</h2>
+    </header>
+    <main>
+        <p class="form-error error-msg"></p>
+    
+        <form id="badge-form" action="https://script.google.com/macros/s/AKfycbwhWomQjaALphGQ1JeSQhfO0VsaZxYBRl-xnEWp328wB4wFlg_T/exec"
+                onsubmit="return validateForm();" method="post">
+            <fieldset>
+                <legend>Badge Options</legend>
+                <label for="badge-selector">Select Badge</label>
+                <select id="badge-selector" name="selectedbadge" value="Choose badge" required>
+                </select>
+
+                <button type="button" onclick="showFieldset('newBadge', true)">Add New</button><br>
+                
+                <fieldset id="newBadge">
+                    <legend>Add New Badge</legend>
+                    <p>If you only want to create a new badge without issuing it fill out this section of the form, 
+                        select Done, then scroll down to enter the admin password and select Create Badge.
+                    </p>
+
+                    <label for="badge-name">Name</label>
+                    <input type="text" name="badgename" id="badge-name" onblur="validateInput('badge-name', ['text'])">
+                    <span>Please enter a name for your badge</span>
+                    <span id="badge-name-error" class="error-msg"></span>
+
+                    <label for="badge-desc">Description</label>
+                    <textarea type="text" name="badgedesc" id="badge-desc" onblur="validateInput('badge-desc', ['text'])"></textarea>
+                    <span>Please enter a description for your badge</span>
+                    <span id="badge-desc-error" class="error-msg"></span>
+                    
+                    <label for="badge-image">Image</label>
+                    <input type="url" name="badgeimage" id="badge-image" onblur="validateInput('badge-image', ['png', 'url'])"
+                        placeholder="http://www.ucs.ac.uk/openbadge/badgeimages/AMC_P.png">
+                    <span>The image must be a fully qualified url of type png</span>
+                    <span id="badge-image-error" class="error-msg"></span>
+
+                    <label for="badge-criteria">Criteria</label>
+                    <input type="url" name="badgecriteria" id="badge-criteria" onblur="validateInput('badge-criteria', ['url'])"
+                        placeholder="http://www.ucs.ac.uk/openbadge/AMC-Development-Day.aspx">
+                    <span>This must be a fully qualified url to a statement describing what the learner will have to achieve
+                        to qualify for this badge</span>
+                    <span id="badge-criteria-error" class="error-msg"></span>
+                    
+                    <label for="badge-issuer">Issuing Organisation</label>
+                    <input type="url" name="badgeissuer" id="badge-issuer" onblur="validateInput('badge-issuer', ['json', 'url'])" 
+                        placeholder="http://www.ucslearningservices.co.uk/openbadges/issuerOrganisation.json">
+                    <span>Example: http://www.ucslearningservices.co.uk/openbadges/issuerOrganisation.json</span>
+                    <span id="badge-issuer-error" class="error-msg"></span>
+                    
+                    <br>
+                    <button type="button" onclick="if (validateBadge()) { showFieldset('newBadge'); }">Done</button>
+                    <button type="button" onclick="resetFieldset('newBadge')">Cancel</button><br>
+                    <p>Alignment and Tags properties not currently available. 
+                    See <a href="https://openbadgespec.org/#BadgeClass" target="_blank">Open Badges Spec</a> for more info.</p>
+                </fieldset>
+            </fieldset>
+            
+            
+            <fieldset>
+                <legend>Upload CSV File (optional)</legend>
+                <label for="import">Import Recipient's Details</label>
+                <input 
+                        id="import" type="file" 
+                        onchange="showFieldset('recipient', !getValue('import'))" 
+                        accept=".csv" name="import">
+                <span>Accepts a standard csv file. First row is assumed to be the header [Name, Email].</span>
+                <span id="import-error" class="error-msg"></span>
+            </fieldset>
+            
+            <fieldset id="recipient">
+                <legend>Recipient Details (required to issue)</legend>
+                
+                <label for="recipient-name">Name</label>
+                <input type="text" id="recipient-name" name="name" onblur="validateInput('recipient-name', ['text'])" required>
+                <span>What is the recipient's name?</span>
+                <span id="recipient-name-error" class="error-msg"></span>
+
+                <label for="recipient-email">Email</label>
+                <input type="text" id="recipient-email" name="email" onblur="validateInput('recipient-email', ['email'])" required>
+                <span>Please enter the full email address e.g. studentname@example.ac.uk</span>
+                <span id="recipient-email-error" class="error-msg"></span>
+            </fieldset>
+            
+            <fieldset id="assertions">
+                <legend>Badge Assertions (optional)</legend>
+                
+                <label for="assertion-evidence">Evidence</label>
+                <input type="url" id="assertion-evidence" name="evidence" onblur="validateInput('assertion-evidence', ['url'], true)">
+                <span>The URL to a page showing the recipients work in earning this badge.</span>
+                <span id="assertion-evidence-error" class="error-msg"></span>
+                
+                <label for="assertion-expiration">Expires</label>
+                <input type="date" id="assertion-expiration" name="expiration" onblur="">
+                <span>Date the badge assertion is valid until. (revokation not currently supported)</span>
+                <span id="assertion-expiration-error" class="error-msg"></span>
+            </fieldset>
+            <p class="form-error error-msg"></p>
+            
+            <label for="password" class="lone">Password</label>
+            <input type="password" id="password" name="password" class="lone" required>
+            
+            <button id="issue" type="button" form="badge-form" onclick="submitForm()">Issue Badge(s)</button>
+            <button id="create" type="button" form="badge-form" onclick="submitForm(true)">Create Badge</button>
+            
+        </form>
+    </main>
+    
+    <footer>
+        <section>
+            <p>&copy; <a href="http://www.ucs.ac.uk">ucs.ac.uk</a></p>
+        </section>
+    </footer>
+</body>
+
+</html>

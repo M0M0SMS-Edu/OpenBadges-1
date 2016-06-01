@@ -1,0 +1,28 @@
+#newBadge {
+    display: none;
+}
+
+.error-msg {
+    color: $error;
+    font-weight: bold;
+    display: block;
+    height: 1rem;
+}
+
+.form-error {
+    display: block;
+}
+
+#issue, #create {
+    margin: 20px 20px;
+    width: calc(100% - 40px);
+}
+
+@media only screen and (min-width: 680px) {
+    #issue, #create {
+        width: initial;
+        float: right;
+        position: relative;
+        top: -20px;
+    }    
+}
