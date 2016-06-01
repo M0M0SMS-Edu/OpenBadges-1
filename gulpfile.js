@@ -25,11 +25,20 @@ gulp.task("html:watch", function () {
 gulp.task("watch", ['styles:watch', 'html:watch']);
 
 gulp.task("rename-gs", function () {
-    return gulp.src('./src/appsScripts/**/*.js')
+    return gulp.src('./src/appsScripts/base.js')
+        .pipe(ninja({
+            searchPaths: [
+                './src/appsScripts/partials'
+            ]
+        }))
+        .on('error', function(err) {
+            console.log("A samurai cannot bear the shame of defeat");
+            console.log(err);
+        })
         .pipe(rename(function (path) {
             path.extname = ".gs";
         }))
-        .pipe(gulp.dest('./build/gs'));
+        .pipe(gulp.dest('./build'));
 });
 
 gulp.task("inject:html", function () {
