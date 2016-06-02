@@ -56,17 +56,17 @@ function fillSelect() {
     select.selectedIndex = 0;    
 
     /* Now add badges from server */
-    // google.script.run.withSuccessHandler(function (res) {
-    //     for (badge in res) {
-    //         var option = document.createElement("option");
-    //         option.text = res[badge];
-    //         option.value = res[badge];
-    //         select.add(option);
-    //         if (option.text === selectedBadge) {
-    //             select.selectedIndex = badge + 1;   // we add one for the "please choose" option
-    //         }
-    //     }    
-    // }).getListOfBadges();
+    google.script.run.withSuccessHandler(function (res) {
+        for (var badge in res) {
+            var option = document.createElement("option");
+            option.text = res[badge];
+            option.value = res[badge];
+            select.add(option);
+            if (option.text === selectedBadge) {
+                select.selectedIndex = badge + 1;   // we add one for the "please choose" option
+            }
+        }    
+    }).getBadgeNames();
 }
 
 window.addEventListener('load', fillSelect);

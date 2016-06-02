@@ -20,12 +20,14 @@ function submitForm(badgeOnly) {
     if (selected === "Please choose") {
         errorMsg += "Badge must be selected. ";
     }
-    
+
     var badgeName = document.getElementById("badge-name").value;
     if (badgeName && badgeName !== selected) {
         errorMsg += "Your new badge is not the selected badge, either select it or clear the new badge form. ";
+    } else if (badgeOnly && !badgeName) {
+        errorMsg += "No new badge information to create. ";
     }
-    
+
     if (!badgeOnly) {
         if (!validateRecipient()) {
             errorMsg += "Recipient details must be entered into form or uploaded by CSV file. ";
@@ -40,8 +42,8 @@ function submitForm(badgeOnly) {
     }
 }
 
+/* This is a convenience to check the password before submitting, however password must still be checked when form is submitted on the server */
 function securityCheck() {
-    var form = document.getElementById("badge-form");
     var password = document.getElementById("password");
     var formError = document.getElementsByClassName("form-error");
     
@@ -57,13 +59,14 @@ function securityCheck() {
 }
 
 function sendForm() {
+    var form = document.getElementById("badge-form");
     google.script.run.withFailureHandler(function (err) {
         showError("Server error while submitting form: contact administrator");
-    }).withSuccessHandler(function (response) {
-        if (response) {
+    }).withSuccessHandler(function (error) {
+        if (!error) {
             form.submit();
         } else {
-            showError("Server error while validating form: check form details");
+            showError("Server error: " + error);
         }
-    }).submitForm(password.value);
+    }).submitForm(form);
 }

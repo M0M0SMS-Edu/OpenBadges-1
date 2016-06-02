@@ -24,7 +24,7 @@ gulp.task("html:watch", function () {
 
 gulp.task("watch", ['styles:watch', 'html:watch']);
 
-gulp.task("rename-gs", function () {
+gulp.task("build", function () {
     return gulp.src('./src/appsScripts/base.js')
         .pipe(ninja({
             searchPaths: [

@@ -64,17 +64,17 @@ function fillSelect() {
     select.selectedIndex = 0;    
 
     /* Now add badges from server */
-    // google.script.run.withSuccessHandler(function (res) {
-    //     for (badge in res) {
-    //         var option = document.createElement("option");
-    //         option.text = res[badge];
-    //         option.value = res[badge];
-    //         select.add(option);
-    //         if (option.text === selectedBadge) {
-    //             select.selectedIndex = badge + 1;   // we add one for the "please choose" option
-    //         }
-    //     }    
-    // }).getListOfBadges();
+    google.script.run.withSuccessHandler(function (res) {
+        for (var badge in res) {
+            var option = document.createElement("option");
+            option.text = res[badge];
+            option.value = res[badge];
+            select.add(option);
+            if (option.text === selectedBadge) {
+                select.selectedIndex = badge + 1;   // we add one for the "please choose" option
+            }
+        }    
+    }).getBadgeNames();
 }
 
 window.addEventListener('load', fillSelect);
@@ -205,12 +205,14 @@ function submitForm(badgeOnly) {
     if (selected === "Please choose") {
         errorMsg += "Badge must be selected. ";
     }
-    
+
     var badgeName = document.getElementById("badge-name").value;
     if (badgeName && badgeName !== selected) {
         errorMsg += "Your new badge is not the selected badge, either select it or clear the new badge form. ";
+    } else if (badgeOnly && !badgeName) {
+        errorMsg += "No new badge information to create. ";
     }
-    
+
     if (!badgeOnly) {
         if (!validateRecipient()) {
             errorMsg += "Recipient details must be entered into form or uploaded by CSV file. ";
@@ -225,8 +227,8 @@ function submitForm(badgeOnly) {
     }
 }
 
+/* This is a convenience to check the password before submitting, however password must still be checked when form is submitted on the server */
 function securityCheck() {
-    var form = document.getElementById("badge-form");
     var password = document.getElementById("password");
     var formError = document.getElementsByClassName("form-error");
     
@@ -242,15 +244,16 @@ function securityCheck() {
 }
 
 function sendForm() {
+    var form = document.getElementById("badge-form");
     google.script.run.withFailureHandler(function (err) {
         showError("Server error while submitting form: contact administrator");
-    }).withSuccessHandler(function (response) {
-        if (response) {
+    }).withSuccessHandler(function (error) {
+        if (!error) {
             form.submit();
         } else {
-            showError("Server error while validating form: check form details");
+            showError("Server error: " + error);
         }
-    }).submitForm(password.value);
+    }).submitForm(form);
 }
     </script>
     <style>
@@ -384,7 +387,7 @@ footer {
         <p class="form-error error-msg"></p>
     
         <form id="badge-form" action="https://script.google.com/macros/s/AKfycbwhWomQjaALphGQ1JeSQhfO0VsaZxYBRl-xnEWp328wB4wFlg_T/exec"
-                onsubmit="return validateForm();" method="post">
+                onsubmit="true" method="post">
             <fieldset>
                 <legend>Badge Options</legend>
                 <label for="badge-selector">Select Badge</label>
@@ -443,7 +446,7 @@ footer {
                 <input 
                         id="import" type="file" 
                         onchange="showFieldset('recipient', !getValue('import'))" 
-                        accept=".csv" name="import">
+                        accept=".csv" name="file">
                 <span>Accepts a standard csv file. First row is assumed to be the header [Name, Email].</span>
                 <span id="import-error" class="error-msg"></span>
             </fieldset>
