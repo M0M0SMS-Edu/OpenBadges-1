@@ -8,16 +8,16 @@ function resetFieldset(id) {
 
     var fieldset = document.getElementById(id);
     var inputs = fieldset.querySelectorAll("input, textarea");
-    for (var i = inputs.length; i--; ) {
+    for (var i = inputs.length; i--;) {
         inputs[i].value = "";
     }
 
     /* Hide the error messages */
     var errors = fieldset.querySelectorAll(".error-msg");
-    for (var i = errors.length; i--; ) {
-        errors[i].value = "";
+    for (var j = errors.length; j--;) {
+        errors[j].value = "";
     }
-    
+
     fillSelect();
 }
 
@@ -28,20 +28,20 @@ function getValue(id) {
 
 function setSelectedBadge() {
     fillSelect();
-    
+
     var select = document.getElementById("badge-selector");
     var badgeName = document.getElementById("badge-name");
     var option = document.createElement("option");
     option.text = badgeName.value;
     select.add(option, 0);
-    select.selectedIndex = 0; 
+    select.selectedIndex = 0;
 }
 
 function fillSelect() {
     var select = document.getElementById("badge-selector");
     var selectedBadge = select.value;
     console.log("selected badge: " + selectedBadge);
-    
+
     /* First clear the options */
     while (select.hasChildNodes()) {
         select.removeChild(select.firstChild);
@@ -53,7 +53,7 @@ function fillSelect() {
     prompt.value = "Please choose";
     prompt.disabled = true;
     select.add(prompt, 0);
-    select.selectedIndex = 0;    
+    select.selectedIndex = 0;
 
     /* Now add badges from server */
     google.script.run.withSuccessHandler(function (res) {
@@ -65,8 +65,8 @@ function fillSelect() {
             if (option.text === selectedBadge) {
                 select.selectedIndex = badge + 1;   // we add one for the "please choose" option
             }
-        }    
-    }).getBadgeNames();
+        }
+    }).getBadgeList(0);
 }
 
-window.addEventListener('load', fillSelect);
+window.addEventListener("load", fillSelect);

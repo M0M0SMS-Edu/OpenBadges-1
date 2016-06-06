@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var minifyjs = require('gulp-uglify');
 var rename = require('gulp-rename');
 var ninja = require('gulp-nunjucks-html');
 var sass = require('gulp-sass');
@@ -35,6 +36,7 @@ gulp.task("build", function () {
             console.log("A samurai cannot bear the shame of defeat");
             console.log(err);
         })
+        .pipe(minifyjs())
         .pipe(rename(function (path) {
             path.extname = ".gs";
         }))

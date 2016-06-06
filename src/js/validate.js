@@ -3,7 +3,7 @@ function validateValue(value, test) {
      * http://image.png
      * http://www.image.png
      * http://www.example.com/image.png
-     * 
+     *
      */
     var urlPattern = /^https?\:\/\/[\w/.]+$/;  // start http(s):// then alphanumeric_ followed by a dot
     var pngPattern = /\.png$/;
@@ -64,36 +64,39 @@ function validateValue(value, test) {
 function validateInput(id, array, opt) {
     console.log("validating input " + id);
     var inputField = document.getElementById(id);
-    var inputFieldError = document.getElementById(id+"-error");
-    var errorString = validateValue(inputField.value, 'empty');
+    var inputFieldError = document.getElementById(id + "-error");
+    var errorString = validateValue(inputField.value, "empty");
 
     if (!errorString) {
-        for (test in array) {
+        for (var test in array) {
             errorString += validateValue(inputField.value, array[test]);
-        } 
+        }
     } else if (opt) {
         errorString = "";
     }
-    
+
     inputFieldError.innerHTML = errorString;
     return errorString.length === 0;
 }
 
-function validateBadge() {   
+function validateBadge() {
     var valid = validateInput("badge-name", ["text"]) &
         validateInput("badge-desc", ["text"]) &
         validateInput("badge-image", ["url", "png"]) &
         validateInput("badge-criteria", ["url"]) &
         validateInput("badge-issuer", ["url", "json"]);
-     
-     if (valid) {setSelectedBadge();}
-     return valid;
+
+    if (valid) {
+        setSelectedBadge();
+    }
+
+    return valid;
 }
 
 function validateRecipient() {
     var file = document.getElementById("import").value;
     var valid = false;
-    
+
     if (file) {
         valid = validateInput("import", ["csv"]);
     } else {

@@ -12,14 +12,14 @@ function readFile(form) {
         var errorString = "";
 
         // last element is length property? first is header.
-        for (line = fileArray.length - 1; --line; ) {
+        for (var line = fileArray.length - 1; --line;) {
             var lineArray = fileArray[line].split(",");
             var name = lineArray[0];
             var email = lineArray[1].trim();
 
             var err = "";
-            err += validateInput(name, ['text']);
-            err += validateInput(email, ['email']);
+            err += validateInput(name, ["text"]);
+            err += validateInput(email, ["email"]);
 
             if (err) {
                 errorString += "Failed to add badge for " + name + ": " + err;

@@ -1,6 +1,6 @@
 function showError(msg) {
     var formError = document.getElementsByClassName("form-error");
-    for (i = formError.length; i--; ) {
+    for (var i = formError.length; i--;) {
         formError[i].innerHTML = msg;
     }
     document.getElementById("create").disabled = false;
@@ -10,13 +10,13 @@ function showError(msg) {
 function submitForm(badgeOnly) {
     document.getElementById("create").disabled = true;
     document.getElementById("issue").disabled = true;
-    
+
     var selector = document.getElementById("badge-selector");
     var selected = selector.options[selector.selectedIndex].value;
 
-        
+
     var errorMsg = "";
-    
+
     if (selected === "Please choose") {
         errorMsg += "Badge must be selected. ";
     }
@@ -33,7 +33,7 @@ function submitForm(badgeOnly) {
             errorMsg += "Recipient details must be entered into form or uploaded by CSV file. ";
         }
     }
-    
+
     if (errorMsg) {
         showError(errorMsg);
         return false;
@@ -46,7 +46,7 @@ function submitForm(badgeOnly) {
 function securityCheck() {
     var password = document.getElementById("password");
     var formError = document.getElementsByClassName("form-error");
-    
+
     google.script.run.withFailureHandler(function (err) {
         showError("Server error while validating password: contact administrator");
     }).withSuccessHandler(function (response) {

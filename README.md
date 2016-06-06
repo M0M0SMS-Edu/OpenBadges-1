@@ -1,7 +1,29 @@
 # OpenBadgeTest
 Testing Open Badges v1.1
 
-https://script.google.com/macros/s/AKfycbwhWomQjaALphGQ1JeSQhfO0VsaZxYBRl-xnEWp328wB4wFlg_T/exec - live system
+https://script.google.com/macros/s/AKfycbwhWomQjaALphGQ1JeSQhfO0VsaZxYBRl-xnEWp328wB4wFlg_T/exec?claimcode=8AEF692D - live system
+
+http://tinyurl.com/zddwq8l/exec?claimcode=8AEF692D
+
+{  
+  "@context":"https://w3id.org/openbadges/v1",
+  "type":"Assertion",
+  "id":"http://tinyurl.com/zddwq8l/exec?claimcode=5737E907",
+  "uid":"5737E907",
+  "recipient":{  
+    "identity":"sha256$694eeab54c63ae9166901b9c014d411ee0e292d3fd323f88518a69fb7c049a4a",
+    "type":"email",
+    "hashed":true,
+    "salt":"ucs"
+  },
+  "evidence":"",
+  "badge":"http://tinyurl.com/zddwq8l/exec?badgename=Test",
+  "verify":{  
+    "type":"hosted",
+    "url":"http://tinyurl.com/zddwq8l/exec?claimcode=5737E907"
+  },
+  "issuedOn":"2016-06-03"
+}
 
 ## Introduction
 

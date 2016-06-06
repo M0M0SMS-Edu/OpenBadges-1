@@ -18,7 +18,7 @@ function checkPassword(password) {
     this._hasher;e=d.finalize(e);d.reset();return d.finalize(this._oKey.clone().concat(e))}})})();
     (function(){var g=CryptoJS,j=g.lib,e=j.Base,d=j.WordArray,j=g.algo,m=j.HMAC,n=j.PBKDF2=e.extend({cfg:e.extend({keySize:4,hasher:j.SHA1,iterations:1}),init:function(d){this.cfg=this.cfg.extend(d)},compute:function(e,b){for(var g=this.cfg,k=m.create(g.hasher,e),h=d.create(),j=d.create([1]),n=h.words,a=j.words,c=g.keySize,g=g.iterations;n.length<c;){var p=k.update(b).finalize(j);k.reset();for(var f=p.words,v=f.length,s=p,t=1;t<g;t++){s=k.finalize(s);k.reset();for(var x=s.words,r=0;r<v;r++)f[r]^=x[r]}h.concat(p);
     a[0]++}h.sigBytes=4*c;return h}});g.PBKDF2=function(d,b,e){return n.create(e).compute(d,b)}})();
-    
+
     function doCheck(password) {
         var salt = "Suffolk";
         var key512Bits1000Iterations = CryptoJS.PBKDF2(password, salt, { keySize: 512/32, iterations: 50 });
@@ -26,7 +26,6 @@ function checkPassword(password) {
 
         return (key512Bits1000Iterations.toString() === hash);
     }
-    
+
     return doCheck(password);
 }
-
