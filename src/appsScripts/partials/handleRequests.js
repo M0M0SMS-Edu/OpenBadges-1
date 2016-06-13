@@ -1,19 +1,21 @@
 function doGet(request) {
     var salt = "pegasus";
-    var baseUrl = "https://script.google.com/macros/s/AKfycbwhWomQjaALphGQ1JeSQhfO0VsaZxYBRl-xnEWp328wB4wFlg_T/exec";
+    var baseUrl = ScriptProperties.getProperty("baseUrl");
     var contentService;
 
     if (request.parameter.claimcode) {
         var badgeAssertion = buildAssertionJson(request.parameter.claimcode, salt, baseUrl);
         contentService = createContentService(badgeAssertion);
-        return contentService;
+        return ContentService.createTextOutput(JSON.stringify(badgeAssertion))
+            .setMimeType(ContentService.MimeType.JSON);
     } else if (request.parameter.badgename) {
         var badgeClass = buildBadgeJson(request.parameter.badgename, baseUrl);
         if (badgeClass) {
             contentService = createContentService(badgeClass);
-            return contentService;
+            return ContentService.createTextOutput(JSON.stringify(badgeClass))
+                .setMimeType(ContentService.MimeType.JSON);
         } else {
-            return ContentService.createTextOutput("Badge not found");
+            return ContentService.createTextOutput(testAssertion);
         }
     } else {
         return HtmlService.createHtmlOutputFromFile("ui.html")

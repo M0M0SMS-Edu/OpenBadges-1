@@ -1,5 +1,6 @@
-var baseUrl = "https://script.google.com/macros/s/AKfycbwhWomQjaALphGQ1JeSQhfO0VsaZxYBRl-xnEWp328wB4wFlg_T/exec?claimcode=";
-var bakerBaseUrl = "http://backpack.openbadges.org/baker?assertion=";
+// var baseUrl = "https://script.google.com/macros/s/AKfycbwhWomQjaALphGQ1JeSQhfO0VsaZxYBRl-xnEWp328wB4wFlg_T/exec?claimcode=";
+var baseUrl = "https://script.google.com/macros/s/AKfycbwhWomQjaALphGQ1JeSQhfO0VsaZxYBRl-xnEWp328wB4wFlg_T/exec?claimcode=7DC63343";
+var bakerBaseUrl = "http://beta.openbadges.org/baker?assertion=";
 
 function getQueryString() {
     var urlSearchString = window.location.search;
@@ -19,8 +20,9 @@ function callback(err, result) {
 }
 
 function doIssue() {
-    var link = baseUrl + getQueryString();
-    OpenBadges.issue_no_modal([link], callback);
+    var link = baseUrl;// + getQueryString();
+    // OpenBadges.issue_no_modal([link]);   // callback not applicable to no_modal method
+    OpenBadges.issue([link], callback);
 }
 
 function doBake() {

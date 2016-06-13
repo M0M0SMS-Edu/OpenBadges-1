@@ -2,3 +2,4 @@ node_modules/
 */**/output.*
 password/
 .tmp/
+src/web/*.xml

@@ -1,3 +1,11 @@
+function getUidRow(UID, values) {
+    for (var row = values.length; row--;) {
+        if (values[row][0] === UID) {
+            return row + 2;
+        }
+    }
+    return "UID not found";
+}
 /*
 * args claim code as Byte array
 *
@@ -28,17 +36,17 @@ function buildAssertionJson(claimcode, salt, baseUrl) {
         "issuedOn": "1979-01-01"
     };
 
-    // To access spreadsheet data we need to get by id (stored by running setup function)
+    // // To access spreadsheet data we need to get by id (stored by running setup function)
     var response = SpreadsheetApp.openById(ScriptProperties.getProperty("test")).getSheetByName("DATA");
 
     var UID = claimcode;
 
     // Find out the row from the UID
-    var column = response.getRange("G:G");
-    var values = column.getValues();
-    var row = 1;
-    while (values[row - 1] !== UID) {
-        row++;
+    var lastRow = response.getLastRow();
+    var values = response.getRange("G2:G" + lastRow).getValues();
+    var row = getUidRow(UID, values);
+    if (typeof row !== "number") {
+        return row;
     }
 
     var timestamp = response.getRange(row, 1).getValue();
