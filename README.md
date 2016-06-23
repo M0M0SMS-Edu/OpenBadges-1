@@ -61,6 +61,15 @@ When using SpreadsheetApp.openById you can now enter in the key instead of the l
 * Once published, copy the web app URL
 * Go back to File > Project Properties : Script properties and add a new key "baseUrl" with the value you just copied
 This is also the address that users will need to navigate to when issueing new badges or assertions
+* You will also need to enter your own salts and passwords. The files that need to be changed are:
+	* src/apps/Scripts/partials/addAssertion
+	* src/apps/Scripts/partials/checkPassword
+	* src/apps/Scripts/partials/handleRequest
+
+You can use the tool at http://www.ucslearningservices.co.uk/openbadges/hash.html to generate a new hash to be used in checkPassword. Enter the desired password with the salt you are using and click PBKDF2. The SHA256 button is used
+to check records already in the Google Spreadsheet as names and emails are stored in the SHA256 hashed format to
+protect user's personal data. By entering a user's email in the password field along with the correct salt, you can
+generate the corresponding hash for their email and search for it in the spreadsheet.
 
 ### Code
 
@@ -98,5 +107,10 @@ be added to another 3rd party badge repository.
 * There may be Google account limits on the number of emails that can be sent per day (check your account for details - https://support.google.com/a/answer/166852?hl=en)
 * Google returns 503 Service Unavailable if multiple badges are claimed within short space of time (order of minutes)
 
-http://tinyurl.com/zddwq8l/exec?claimcode=8AEF692D
+
+### Additional info
+
+There is a short url for the badge issuer that is unused but may be useful for some applications:
+
+http://tinyurl.com/zddwq8l/exec
 

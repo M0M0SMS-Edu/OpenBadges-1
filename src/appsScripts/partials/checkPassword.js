@@ -20,9 +20,9 @@ function checkPassword(password) {
     a[0]++}h.sigBytes=4*c;return h}});g.PBKDF2=function(d,b,e){return n.create(e).compute(d,b)}})();
 
     function doCheck(password) {
-        var salt = "Suffolk";
+        var salt = "your salt";
         var key512Bits1000Iterations = CryptoJS.PBKDF2(password, salt, { keySize: 512/32, iterations: 50 });
-        var hash = "0ec8e829ba5b05b9e96680c571a1cb40d02584a51f47e23a36f433354e409fde2a2838b0ca60b624eaa5070a5348e3c28cc2f93115ac5d1a01fbea893bb1ba60";
+        var hash = "your hash using PBKDF2 with keySize 512/32 and 50 iterations";
 
         return (key512Bits1000Iterations.toString() === hash);
     }

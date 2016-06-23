@@ -1,5 +1,5 @@
 function doGet(request) {
-    var salt = "pegasus";
+    var salt = "your salt";
     var baseUrl = ScriptProperties.getProperty("baseUrl");
     var contentService;
 
