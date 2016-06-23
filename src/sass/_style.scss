@@ -3,16 +3,43 @@ body {
     font-family: $ucs-font;
 }
 
-header {
-    background: lighten($ucs-yellow, 40%);
+#page h2 {
+    text-align: center;
+}
+
+#top-bar {
+    background: #222;
+    color: white;
+    background: #222 url(http://www.ucslearningservices.co.uk/openbadges/triangle.svg) no-repeat bottom right / 50%;
+}
+
+#nav-bar {
+    background: #444;
+}
+
+#nav-bar > nav {
+    padding: 5px 20px;
+    color: white;
+}
+
+nav a {
+    text-decoration: none;
+    color: white;
+}
+
+nav li {
+    display: inline-block;
+    list-style: none;
+    border-left: 1px solid white;
+    padding: 5px 20px;
+}
+
+#page {
+    background: #CCC;
 }
 
 fieldset {
     background: lighten($ucs-grey, 65%)
-}
-
-h1 {
-    color: darken($ucs-green, 15%);
 }
 
 label {
@@ -21,24 +48,30 @@ label {
 
 legend {
     border: 1px solid black;
-    border-radius: 5px;
     background: lighten($ucs-blue, 20%);
     color: black;
+    padding: 3px 6px;
 }
-
-
 
 button, input[type='file'], select {
     font-size: 1.2em;
 }
 
-footer {
-    margin: 0;
-    background: lighten($ucs-grey, 10%);
-    padding: 10px;
+button {
+    background: #CCC url(http://www.ucslearningservices.co.uk/openbadges/triangle.svg) no-repeat bottom right / 30%;
 }
 
-footer * {
-    color: lighten($ucs-blue, 30%);
+#foot-bar > footer {
+    padding: 50px 20px;
+    color: white;
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: cyan;
     text-decoration: none;
+}
+
+.right {
+    float: right;
 }

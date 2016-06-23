@@ -1,7 +1,7 @@
-# OpenBadgeTest
-Testing Open Badges v1.1
+# OpenBadge
+Open Badges v1.1
 
-https://script.google.com/macros/s/AKfycbwhWomQjaALphGQ1JeSQhfO0VsaZxYBRl-xnEWp328wB4wFlg_T/exec?claimcode=8AEF692D - live system
+https://script.google.com/macros/s/AKfycbwhWomQjaALphGQ1JeSQhfO0VsaZxYBRl-xnEWp328wB4wFlg_T/exec - live system
 
 ## Introduction
 
@@ -16,7 +16,7 @@ Although the live system is hosted on Google, behind the scenes some of the fron
     git clone https://github.com/SuffolkDLT/OpenBadges
     npm install
 
-Alternatively you can visit the page on github and copy of download the code manually.
+Alternatively you can visit the page on github and copy or download the code manually.
 
 See also:
 
@@ -54,7 +54,7 @@ You can now enter in the code for your project, but there are a few more steps b
 * Select the "Script properties" tab
 * Add a new row and enter in a key name for the spreadsheet you have created (default key is "test")
 * The value will be the long alpha-numeric string contained in the URL of your spreadsheet
-When using SpreadsheetApp.openById you can now enter in the key instead of the long alpha-numeric
+When using SpreadsheetApp.openById you can now enter in the key instead of the long alpha-numeric (if you've used the default "test" then there is no need to change these references)
 * Go to Publish
 * Execute the app as: Me
 * Who has access to the app: Anyone, even anonymous

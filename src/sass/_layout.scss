@@ -1,18 +1,25 @@
 body {
-    margin: 0 auto;
-    padding: 0;
+    font-family: Arial,Helvetica,Verdana;
+    margin: 0;
+    background: #666; /* same as footer */
 }
 
-header {
-    margin: 0;
-    padding: 5px 25px;
+.full-width {
     width: 100%;
+    margin: 0;
+}
+
+#top-bar > header {
+    padding: 10px 150px 10px 20px;
+}
+
+#page {
+    padding: 10px 0 30px 0;
 }
 
 main {
-    margin: 5px 0;
-    padding: 5px;
-    width: calc(100% - 10px);
+    margin: 0;
+    padding: 0;
 }
 
 label {
@@ -30,10 +37,6 @@ label, input:not(#password), textarea {
     margin-bottom: 10px;
 }
 
-#import-recipients {
-    margin-bottom: 10px;
-}
-
 button {
     margin: 10px 0;
 }
@@ -43,27 +46,21 @@ fieldset > span {
 }
 
 fieldset {
-    margin: 20px 5px;  
+    margin: 20px 5px;
 }
 
 .lone {
     margin: 0 20px;
 }
 
-
-
-footer {
+#foot-bar > footer {
     clear: both;
-    margin: 10px 0;
-    text-align: center;
+    padding: 30px 20px;
 }
 
 @media only screen and (min-width: 680px) {
-    body {
-        max-width: 660px;
-    }
-    
-    header {
-        width: initial;
+    .full-width > * {
+        margin: 0 auto;
+        max-width: 960px;
     }
 }

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hash</title>
+    <script src="pbkdf2.js"></script>
+    <script src="sha256.js"></script>
+    <script>
+        function gen() {
+            var input = document.getElementById("input");
+            var salt = document.getElementById("salt");
+            var output = document.getElementById("output");
+            output.innerHTML = CryptoJS.PBKDF2(input.value, salt.value, { keySize: 512/32, iterations: 50 });
+        };
+
+        function sha() {
+            var input = document.getElementById("input");
+            var salt = document.getElementById("salt");
+            var output = document.getElementById("output");
+            output.innerHTML = CryptoJS.SHA256(input.value + salt.value).toString();
+        };
+    </script>
+</head>
+<body>
+    <main>
+        <h1>Hash Generator</h1>
+        <form>
+            <label for="input">Password</label>
+            <input id="input" type="password">
+            <label for="salt">Salt</label>
+            <input id="salt" type="text">
+            <button type="button" onclick="gen()">PBKDF2</button>
+            <button type="button" onclick="sha()">SHA256</button>
+            <br>
+            <span id="output"></span>
+        </form>
+    </main>
+</body>
+</html>

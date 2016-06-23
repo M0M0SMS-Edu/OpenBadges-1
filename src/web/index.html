@@ -3,34 +3,61 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>UCS Open Badges</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University of Suffolk | Open Badges</title>
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>-->
     <script src="https://beta.openbadges.org/issuer.js"></script>
     <script src="openbadges.js"></script>
     <link rel="stylesheet" href="default.css">
-
+    <title>University of Suffolk | Open Badges</title>
 </head>
 
 <body>
-    <h1>UCS Open Badges</h1>
-    <nav>
-        <li><a href="http://www.ucs.ac.uk">UCS Home</a></li>&nbsp|
-        <li><a href="http://libguides.ucs.ac.uk"> LibGuides</a></li>
-    </nav>
-    <main>
-        <h2>Collect Your Badge</h2>
-        <p>Choose how you would like to recieve your badge</p>
-        <button id="b1" type='submit' onclick='doIssue();'
-            title="This will bake your badge and place it in your backpack">Issue to Mozilla Backpack</button><br>
-        <button id="b2" type='submit' onclick='location.href=doBake();'
-            title="Uses the Baker REST API">Download your badge</button>
-        <br>
-        <p>Once you've downloaded your (baked) badge you can keep hold of it or upload it to an open badges store.</p>
-        <p>A good alternative to <a href="https://beta.openbadges.org/backpack/login">Mozilla's Backpack</a> is the
-            <a href="https://openbadgepassport.com/en/badges/upload">Open Badge Passport</a>
-        </p>
-    </main>
-
+    <div id="top-bar" class="full-width">
+        <header>
+            <hgroup>
+                <h1>University of Suffolk</h1>
+                <h2>Open Badges</h2>
+            </hgroup>
+        </header>
+    </div>
+    <div id="nav-bar" class="full-width">
+        <nav>
+            <li><a href="http://www.ucs.ac.uk">Suffolk Home</a></li>
+            <li><a href="http://libguides.ucs.ac.uk"> Learning Services</a></li>
+        </nav>
+    </div>
+    <div id="page" class="full-width">
+        <main>
+            <h2>Collect Your Badge</h2>
+            <p>Choose how you would like to recieve your badge</p>
+            <button id="b1" type='submit' onclick='doIssue();'
+                title="This will bake your badge and place it in your backpack">Issue to Mozilla Backpack</button><br>
+            <button id="b2" type='submit' onclick='location.href=doBake();'
+                title="Uses the Baker REST API">Download your badge</button>
+            <br>
+            <p>Once you've downloaded your (baked) badge you can keep hold of it or upload it to an open badges store.</p>
+            <p>A good alternative to <a href="https://beta.openbadges.org/backpack/login" target="_blank">Mozilla's Backpack</a> is the
+                <a href="https://openbadgepassport.com/" target="_blank">Open Badge Passport</a>
+            </p>
+        </main>
+    </div>
+    <div id="foot-bar" class="full-width">
+        <footer>
+            <p class="right">
+                <a href="https://script.google.com/macros/s/AKfycbwhWomQjaALphGQ1JeSQhfO0VsaZxYBRl-xnEWp328wB4wFlg_T/exec">
+                    Admin
+                </a>
+            </p>
+            <p>
+                University of Suffolk<br>
+                Learning Services<br>
+                Waterfront Building<br>
+                Neptune Quay<br>
+                Ipswich, Suffolk IP4 1QJ<br>
+            </p>
+        </footer>
+    </div>
 </body>
 
 </html>

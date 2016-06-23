@@ -1,11 +1,30 @@
-body, main {
+body {
     font-family: Arial,Helvetica,Verdana;
-    margin: 0 20px;
+    margin: 0;
+    background: #666; /* same as footer */
 }
 
-nav {
-    background: darkgrey;
-    padding: 5px 0;
+.full-width {
+    width: 100%;
+    margin: 0;
+}
+
+#top-bar {
+    background: #222;
+    color: white;
+    background: #222 url(triangle.svg) no-repeat bottom right / 50%;
+}
+
+#top-bar > header {
+    padding: 10px 150px 10px 20px;
+}
+
+#nav-bar {
+    background: #444;
+}
+
+#nav-bar > nav {
+    padding: 5px 20px;
     color: white;
 }
 
@@ -17,9 +36,60 @@ nav a {
 nav li {
     display: inline-block;
     list-style: none;
-    padding: 0 20px;
+    border-left: 1px solid white;
+    padding: 5px 20px;
+}
+
+#page {
+    background: #EEE;
+}
+
+main {
+    margin: 0;
+    padding: 30px 20px;
+}
+
+main a {
+    color: blue;
+}
+
+#foot-bar {
+    background: #666;
+}
+
+#foot-bar > footer {
+    padding: 50px 20px;
+    color: white;
+    font-size: 0.9rem;
+}
+
+footer a {
+    color: cyan;
+    text-decoration: none;
 }
 
 button {
-    margin: 10px;
+    width: 100%;
+    font-size: 1.3rem;
+    margin: 20px 0px;
+    background: #CCC url(triangle.svg) no-repeat bottom right / 30%;
 }
+
+.right {
+    float: right;
+}
+
+@media only screen and (min-width: 600px) {
+    .full-width > * {
+        margin: 0 auto;
+        max-width: 960px;
+    }
+
+    button {
+        width: 300px;
+        font-size: 1.0rem;
+        margin: 20px 30px 20px 10px;
+    }
+}
+
+

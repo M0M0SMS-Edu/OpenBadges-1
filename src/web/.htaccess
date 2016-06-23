@@ -1,1 +1,6 @@
 AddType x-httpd-php53 .php
+
+AuthType Basic
+AuthName "Password Protected Area"
+AuthUserFile /home/sites/ucslearningservices.co.uk/public_html/openbadges/.htpasswd
+Require valid-user

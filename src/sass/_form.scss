@@ -2,6 +2,15 @@
     display: none;
 }
 
+#badge-selector {
+    display: inline-block;
+}
+
+#add-new-btn {
+    display: inline-block;
+    margin-left: 20px;
+}
+
 .error-msg {
     color: $error;
     font-weight: bold;
@@ -11,6 +20,7 @@
 
 .form-error {
     display: block;
+    padding: 10px 5px 40px 5px;
 }
 
 #issue, #create {
@@ -24,5 +34,5 @@
         float: right;
         position: relative;
         top: -20px;
-    }    
+    }
 }
